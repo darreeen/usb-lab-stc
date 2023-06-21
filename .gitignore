@@ -1,0 +1,18 @@
+
+# sdcc files
+
+*.hex
+*.ihx
+*.lk
+*.lst
+*.map
+*.mem
+*.rel
+*.rst
+*.sym
+*.asm
+
+# MacOS files
+
+.DS_Store
+settings.json

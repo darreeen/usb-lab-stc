@@ -1,0 +1,39 @@
+USB related codes
+-----------------
+usb_address.h		usb controller internal registers address
+
+usb.h						
+usb.c						handle general usb, including
+								- interrupt service routine
+								- usb controller initialization
+								- usb reset
+			
+utils.c			
+utils.h						general utility functions
+								- usb_read_reg(): read from general usb controller register
+								- usb_write_reg(): write registers
+								- usb_read_fifo(): read from usb controller fifo register
+								- usb_write_fifo(): write fifo registers
+								
+setup.h
+setup.c						functions used during device setup control transfer.
+								- 
+								
+desc.c			
+desc.h						store all usb device descriptors
+								- device descriptors
+								- configuration descriptors and it's subordinate descriptors
+								- interface descriptors
+								- config descriptors
+								- endpoint descriptors
+								- vendor descriptors
+									- 
+								- HID device specific descriptors
+								- manufacturer descriptors
+								- etc
+					
+request_handler_std.c		
+request_handler_std.h		handle standard request
+
+request_handler_class.c
+request_handler_class.h		
