@@ -5,7 +5,7 @@
 #ifndef __CTRL_TRANS_TRANSACTION_
 #define __CTRL_TRANS_TRANSACTION_
 
-void usb_setup();
+void control_request();
 void usb_remuse();
 void usb_suspend();
 

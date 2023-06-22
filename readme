@@ -1,0 +1,8 @@
+naming convention
+-----------------
+function: 			class c style 			`func_tion()`
+global variable: 	g Prefix 				`gVariable`
+pointer: 			p Prefix				`pVariable`
+structure			PascalCase				`PascalCase`
+structure member	camel case				`vValueL`
+marco 				ALL UPPERCASE			`DEVICE_ATTACHED`

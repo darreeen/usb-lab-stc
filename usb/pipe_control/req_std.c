@@ -16,3 +16,9 @@ void get_interface();
 void set_interface();
 
 void synch_frame(); // unsupported yet
+
+void req_std() {
+	switch () {
+
+	}
+}
