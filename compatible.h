@@ -1,9 +1,16 @@
+/**
+* Comptatibility with mutiple compiler specific language extension convention
+* https://sourceforge.net/p/sdcc/code/HEAD/tree/trunk/sdcc/device/include/mcs51/compiler.h#l69
+*
+* Note: although the project could support mutiple compiler's language extension
+*       it still could not compile with Keil msc51 compiler since it dosen't support C11 or above.
+*/
 
-#ifndef COMPILER_H
-#define COMPILER_H
+#ifndef __COMPATIBLE_
+#define __COMPATIBLE_
 /** SDCC - Small Device C Compiler
-  * http://sdcc.sf.net
- */
+* http://sdcc.sf.net
+*/
 #if defined (SDCC) || defined (__SDCC)
 # define SBIT(name, addr, bit)  __sbit  __at(addr+bit)                    name
 # define SFR(name, addr)        __sfr   __at(addr)                        name
@@ -24,22 +31,30 @@
   * http://www.keil.com
  */
 #elif defined __CX51__
-# define SBIT(name, addr, bit)  sbit  name = addr^bit
-# define SFR(name, addr)        sfr   name = addr
-# define SFRX(name, addr)       volatile unsigned char xdata name _at_ addr
-# define SFR16(name, addr)      sfr16 name = addr
-# define SFR16E(name, fulladdr) /* not supported */
-# define SFR16LEX(name, addr)   /* not supported */
-# define SFR32(name, fulladdr)  /* not supported */
-# define SFR32E(name, fulladdr) /* not supported */
+#define SBIT(name, addr, bit)  sbit  name = addr^bit
+#define SFR(name, addr)        sfr   name = addr
+#define SFRX(name, addr)       volatile unsigned char xdata name _at_ addr
+#define SFR16(name, addr)      sfr16 name = addr
+#define SFR16E(name, fulladdr) /* not supported */
+#define SFR16LEX(name, addr)   /* not supported */
+#define SFR32(name, fulladdr)  /* not supported */
+#define SFR32E(name, fulladdr) /* not supported */
 
-# define INTERRUPT(name, vector) void name (void) interrupt vector
-# define INTERRUPT_USING(name, vector, regnum) void name (void) interrupt vector using regnum
+#define INTERRUPT(name, vector) void name (void) interrupt vector
+#define INTERRUPT_USING(name, vector, regnum) void name (void) interrupt vector using regnum
 
 // NOP () macro support
 extern void _nop_ (void);
 #define NOP() _nop_()
 
+/** IntelliSense Comptible
+* https://sourceforge.net/p/sdcc/discussion/1864/thread/e049b17c55/
+*/
+#else
+#define SBIT(name, addr, bit) volatile unsigned char name;
+#define SFR(name,addr) volatile unsigned char name;
+
 #endif
+
 
 #endif
