@@ -9,11 +9,11 @@
 *		there are index allocated for specific string. index 0x00 is for LANGID, 0x01 for manufacturer, 0x02 for product name, 0x03 for serial number
 */
 
-__code char desc_device[18] = {
+__CODE char desc_device[18] = {
 	0x12,		// 0.bLength: descriptor size in bytes
 				// 			use 0x12 for dec 18 = 0x12 hex
 	0x00,		// 1.bDescriptorType:
-				//			use 0x1 for DEVICE Descriptor 
+				//			use 0x1 for DEVICE Descriptor
 	0x00, 0x02, // 2.bcdUSB:	2 Bytes. USB specification release number(BCD)
 				//			use 0x0200 because device supports usb full speed(2.0), and it's little endian
 	0x00,		// 4.bDeviceClass: device class code.
@@ -40,14 +40,14 @@ __code char desc_device[18] = {
 	0x00,		// 16.iSerialNumber: index of string descriptor for serial number
 				//			using 0x00 for there's no serial number(??? the book "usb complete" wrote about that but device must NOT return langID according to usb 2.0 spec)
 	0x01		// 17.bNumConfigurations: number of possible configurations
-				// 			equals the number of configurations the device support at the current operating speed 
+				// 			equals the number of configurations the device support at the current operating speed
 				//			using 0x1 as we only has 1 configuration descriptor
 };
 
-__code char desc_conf[41] = {
+__CODE char desc_conf[41] = {
 	// configuration descriptor
 	0x09,		// 0.bLength: descriptor size in bytes
-				// 			use 0x09 
+				// 			use 0x09
 	0x02,		// 1.bDescriptorType
 				//			use 0x02 for configuration descriptor
 	0x29, 0x00,	// 2.wTotalLength: 2 bytes. number of bytes in the configuration descriptor and all of it's subordinate descriptors.
@@ -62,7 +62,7 @@ __code char desc_conf[41] = {
 				//			use 0x80 for bus powered device and keep compatibility with usb 1.0
 	0x32,		// 8.bMaxPower: bus power required in units of 2ma(usb2.0)
 				//			use 0x32 (dec 50) for 100ma
-				
+
 	// subordinate descriptors:
 	// 1. interface descriptor
 	//		many of those fields won't be found in common books.
@@ -82,8 +82,8 @@ __code char desc_conf[41] = {
 	0x01,		// 7.bInterfaceProtocol: protocol code
 				//			use 0x01 for keyboard protocol
 	0x00,		// 8.iInterface: Index of string descriptor for the interface
-				//			use 0x00 because there's no string descriptor for this 
-	
+				//			use 0x00 because there's no string descriptor for this
+
 	// 2. hid class device descriptor
 	0x09,		// 0.bLength
 	0x21,		// 1.bDescriptorType, use 0x21 for hid
@@ -98,7 +98,7 @@ __code char desc_conf[41] = {
 				//			use 0x22, for hid report descriptor
 	0x41, 0x00,	// 7.wDescriptorLength: total size of report descriptor
 				// 			use 0x3f or 0x41
-	
+
 	// 3. endpoint in descriptor
 	0x07,		// 0.bLength
 	0x05,		// 1.bDescriptorType, use 0x05 for endpoint
@@ -109,13 +109,13 @@ __code char desc_conf[41] = {
 				//			bit 1-0 specify transfer type: 0b00 control, 0b01=isochronous, 0b10=bulk, 0b11=interrupt
 				//			use 0x03 for interrupt transfer
 	0x08, 0x00,	// 4.wMaxPacketSize: 2 bytes. maximum packet size supported
-				//			use 0x08 0x00 (hex 0x0008) is enough for hid  
+				//			use 0x08 0x00 (hex 0x0008) is enough for hid
 	0x0a,		// 6.bInterval: service interval or NAK rate
 				//			service interval for interrupt and isochronous endpoints
-				//			host polls the device at regular intervals and data is transmitted each time the host polls the device 
+				//			host polls the device at regular intervals and data is transmitted each time the host polls the device
 				//			it's called interrupt transfer because it used for getting interrupt data from the device.
 				//			use 0x0a for 10ms interval
-	
+
 	// 4. endpoint out descriptor
 	0x07,		// 0.bLength
 	0x05,		// 1.bDescriptorType
@@ -131,20 +131,20 @@ __code char desc_conf[41] = {
 // https://learn.adafruit.com/custom-hid-devices-in-circuitpython/report-descriptors
 // http://eleccelerator.com/usbdescreqparser/
 // https://github.com/NordicSemiconductor/ble-sdk-arduino/blob/master/libraries/BLE/examples/ble_HID_keyboard_template/USD%20HID%20Report%20Descriptor%20-%20Keyboard.txt
-__code char desc_hid_report[23] = {
+__CODE char desc_hid_report[23] = {
 	// select usage page and keyboard usage
 	0x05, 0x01,	// Global: Usage Pages 1 byte 00000101, Generic Desktop Page 0x01,
 				// 			use for select General Desktop Page, and concat with keyboard usage
 	0x09, 0x06,	// Local: Usage Keyboard 1 byte 00001001, Keyboard 0x06
-	
+
 	// Application Collection
 	0xa1, 0x01, // Main: Collection 1 byte 10100001, Application 0x01
-						// switch to keyboard control page 
+						// switch to keyboard control page
 		0x05, 0x07,		// Global: Usage Pages 1 byte 00000101, Keyboard Page 0x07
 	// Report Byte 0: Report ID
 	// Report Byte 1: Modifier Keys
-		// modifier keys: variable input 
-		// E0: Left Control 
+		// modifier keys: variable input
+		// E0: Left Control
 		// E1: Left Shift
 		// E2: Left Alt
 		// E3: Left GUI
@@ -155,14 +155,14 @@ __code char desc_hid_report[23] = {
 		0x19, 0xe0,		// Local: Usage Minimum 00011001, minimum usage id 0xe0 (224 LeftControl)
 		0x29, 0xe7,		// Local: Usage maximum 00101001, max usage id 0xe7(231 Keyboard Right GUI)
 		0x15, 0x00,		// Global: Logic minimum 00010101, min logic value 0 (a button only has 0 and 1)
-		0x25, 0x01,		// Global: Logic maximum 00100101, max logic value 1 
+		0x25, 0x01,		// Global: Logic maximum 00100101, max logic value 1
 		0x75, 0x01,		// Global: Report size 01110101, each report size 1 bit, 0x01
 		0x95, 0x08,		// Global: Report count 10010101, has 8 of the field, 0x08
 		0x81, 0x02,		// Main: Input(Data, Variable, Absolute) 10000001, 00000010
 						// 		Absolute: a button state is not a relative value, it'a absolute value
 						//		Variable: it should be variable. rather than an array
 						//		Data: indicate the item defining report fields that contain modifiable device data. rather than an static value(i think both of those should work for keyboard)
-	// Report Byte 2: Reserved 
+	// Report Byte 2: Reserved
 		0x95, 0x01,		// Global: Report count 01011111, has 1 of the field, 0x01
 		0x75, 0x08,		// Global: Report size 01110101, each report size 8 bit, 0x08
 		0x81, 0x01,		// Main: Input(Constant)
@@ -177,18 +177,18 @@ __code char desc_hid_report[23] = {
 		0x81, 0x00,		// Main: Input(Data, Array)
 	// end the collection
 	0xc0				// Main End Collection
-	
+
 };
 // LANGID desc, index 0
-__code char desc_lang[4] = {
+__CODE char desc_lang[4] = {
 	0x04, 		// 0.bLength
 	0x03,		// 1.bDescriptorType, 0x03 for string type
 	0x09, 0x04		// 2.wLANGID, 2 bytes. 0x0409 for English(United States)
-	
-	
+
+
 };
 // manufact desc, index 1
-__code char desc_manufacturer[12] = {
+__CODE char desc_manufacturer[12] = {
 	0x0c, 		// 0.bLength
 	0x03,		// 1.bDescriptorType, 0x03 for string type
 	// 2. bSTRING	with Unicode UTF-16LE string
@@ -199,7 +199,7 @@ __code char desc_manufacturer[12] = {
 	'N', 0
 };
 // product desc
-__code char desc_product[30] = {
+__CODE char desc_product[30] = {
 	0x1e, 		// 0.bLength
 	0x03,		// 1.bDescriptorType, 0x03 for string type
 	// 2. bSTRING	with Unicode UTF-16LE string
@@ -219,10 +219,10 @@ __code char desc_product[30] = {
 	'O', 0
 };
 // packet 0
-__code char packet0[2] = {
+__CODE char packet0[2] = {
 	0, 0
 };
 // packet 1
-__code char packet1[2] = {
+__CODE char packet1[2] = {
 	1, 0
 };
