@@ -70,13 +70,23 @@ typedef struct {
 } Request;
 // general request structure
 extern Request gRequest;
-
 // constants for bmRequestType
 #define BMRT_REQ_TYPE_MASK 		0x60	// bit 5-6 indicates request type
 #define BMRT_REQ_TYPE_STD		0x00
 #define BMRT_REQ_TYPE_CLASS		0x20
 #define BMRT_REQ_TYPE_VENDOR	0x40
-
+// constants for bRequest
+#define BR_GET_STATUS			0x00
+#define BR_CLEAR_FEATURE		0x01
+#define BR_SET_FEATURE			0x03
+#define BR_SET_ADDRESS			0x05
+#define BR_GET_DESCRIPTOR		0x06
+#define BR_SET_DESCRIPTOR		0x07
+#define BR_GET_CONFIGURATION	0x08
+#define BR_SET_CONFIGURATION	0x09
+#define BR_GET_INTERFACE		0x0a
+#define BR_SET_INTERFACE		0x0b
+#define BR_SYNCH_FRAME			0x0c
 
 /**
 * 5. USB Busy Indicator
