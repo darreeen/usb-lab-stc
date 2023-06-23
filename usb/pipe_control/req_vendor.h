@@ -5,6 +5,8 @@
 #ifndef __CTRL_TRANS_REQ_VENDOR_
 #define __CTRL_TRANS_REQ_VENDOR_
 
-void req_class();
+#include "transaction.h"
+
+void req_vendor();
 
 #endif

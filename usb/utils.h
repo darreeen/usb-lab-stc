@@ -66,9 +66,17 @@ typedef struct {
 	unsigned char wValueH;
 	unsigned char wIndexL;
 	unsigned char wIndexH;
+	uint16_t wLength;
 } Request;
 // general request structure
 extern Request gRequest;
+
+// constants for bmRequestType
+#define BMRT_REQ_TYPE_MASK 		0x60	// bit 5-6 indicates request type
+#define BMRT_REQ_TYPE_STD		0x00
+#define BMRT_REQ_TYPE_CLASS		0x20
+#define BMRT_REQ_TYPE_VENDOR	0x40
+
 
 /**
 * 5. USB Busy Indicator

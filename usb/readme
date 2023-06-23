@@ -15,9 +15,7 @@ utils.h						general utility functions
 								- usb_read_fifo(): read from usb controller fifo register
 								- usb_write_fifo(): write fifo registers
 								
-setup.h
-setup.c						functions used during device setup control transfer.
-								- 
+
 								
 desc.c			
 desc.h						store all usb device descriptors

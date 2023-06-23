@@ -5,8 +5,10 @@
 #ifndef __CTRL_TRANS_TRANSACTION_
 #define __CTRL_TRANS_TRANSACTION_
 
-void control_request();
-void usb_remuse();
-void usb_suspend();
+void control_in();
+
+void control_out();
+
+void control_stall();
 
 #endif

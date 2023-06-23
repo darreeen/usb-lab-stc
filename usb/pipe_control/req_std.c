@@ -17,8 +17,8 @@ void set_interface();
 
 void synch_frame(); // unsupported yet
 
-void req_std() {
-	switch () {
+// void req_std() {
 
-	}
-}
+
+// 	}
+// }

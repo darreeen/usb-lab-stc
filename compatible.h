@@ -1,9 +1,10 @@
 /**
 * Comptatibility with mutiple compiler specific language extension convention
 * https://sourceforge.net/p/sdcc/code/HEAD/tree/trunk/sdcc/device/include/mcs51/compiler.h#l69
+* https://github.com/IOsetting/FwLib_STC8/blob/master/include/fw_reg_base.h
 *
 * Note: although the project could support mutiple compiler's language extension
-*       it still could not compile with Keil msc51 compiler since it dosen't support C11 or above.
+*       it still could not compile with Keil msc51 compiler since it dosen't support C11 new type the uint16_t.
 */
 
 #ifndef __COMPATIBLE_
@@ -63,7 +64,7 @@
 extern void _nop_ (void);
 #define NOP() _nop_()
 
-/** IntelliSense Comptible
+/** IntelliSense Compatible
 * https://sourceforge.net/p/sdcc/discussion/1864/thread/e049b17c55/
 */
 
