@@ -70,23 +70,37 @@ typedef struct {
 } Request;
 // general request structure
 extern Request gRequest;
-// constants for bmRequestType
-#define BMRT_REQ_TYPE_MASK 		0x60	// bit 5-6 indicates request type
-#define BMRT_REQ_TYPE_STD		0x00
-#define BMRT_REQ_TYPE_CLASS		0x20
-#define BMRT_REQ_TYPE_VENDOR	0x40
-// constants for bRequest
-#define BR_GET_STATUS			0x00
-#define BR_CLEAR_FEATURE		0x01
-#define BR_SET_FEATURE			0x03
-#define BR_SET_ADDRESS			0x05
-#define BR_GET_DESCRIPTOR		0x06
-#define BR_SET_DESCRIPTOR		0x07
-#define BR_GET_CONFIGURATION	0x08
-#define BR_SET_CONFIGURATION	0x09
-#define BR_GET_INTERFACE		0x0a
-#define BR_SET_INTERFACE		0x0b
-#define BR_SYNCH_FRAME			0x0c
+// bmRequestType
+	// types
+#define R_BMRT_REQ_TYPE_MASK 				0x60	// bit 5-6 indicates request type
+#define R_BMRT_REQ_TYPE_STD					0x00
+#define R_BMRT_REQ_TYPE_CLASS				0x20
+#define R_BMRT_REQ_TYPE_VENDOR				0x40
+	// recipient
+#define R_BMRT_REQ_RECIPIENT_MASK			0x0f
+#define R_BMRT_REQ_RECIPIENT_DEVICE			0x00
+#define R_BMRT_REQ_RECIPIENT_INTERFACE		0x01
+#define R_BMRT_REQ_RECIPIENT_ENDPOINT		0x02
+	// data direction
+#define R_BMRT_REQ_DIRECTION_MASK			0x80
+#define R_BMRT_REQ_DIRECTION_OUT			0x00
+#define R_BMRT_REQ_DIRECTION_IN				0x80
+// bRequest: request nunmber
+#define R_BR_GET_STATUS						0x00
+#define R_BR_CLEAR_FEATURE					0x01
+#define R_BR_SET_FEATURE					0x03
+#define R_BR_SET_ADDRESS					0x05
+#define R_BR_GET_DESCRIPTOR					0x06
+#define R_BR_SET_DESCRIPTOR					0x07
+#define R_BR_GET_CONFIGURATION				0x08
+#define R_BR_SET_CONFIGURATION				0x09
+#define R_BR_GET_INTERFACE					0x0a
+#define R_BR_SET_INTERFACE					0x0b
+#define R_BR_SYNCH_FRAME					0x0c
+// wIndexL: endpoint number and direction
+#define R_WI_EP1_IN 						0x81
+#define R_WI_EP1_OUT						0x01
+#define R_WI_EP_NUM_MASK					0x0f
 
 /**
 * 5. USB Busy Indicator
