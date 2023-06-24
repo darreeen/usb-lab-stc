@@ -107,9 +107,13 @@ extern Request gRequest;
 */
 extern unsigned char gUsbBusy;
 
+/**
+* 6. USB Buffer
+*/
+extern unsigned char __XDATA gUsbBuffer[256];
 
 /**
-* 6. Endpoint maxium package bits
+* 7. Endpoint maxium package bits
 */
 #define EPS_IN_1							64
 #define EPS_OUT_1							64

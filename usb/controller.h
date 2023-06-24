@@ -41,7 +41,8 @@
 #define INCSR1 				0x11	// in endpoint controll register 1
 #define INCSR1_CLRDT 		0x40	// constants for INCSR1
 #define INCSR1_FLUSH 		0x08
-#define INCSR1_SDSTL 		0x10	//
+#define INCSR1_SDSTL 		0x10
+#define INCSR1_IPRDY 		0x01
 
 #define INCSR2 				0x12	// in endpoint controll register 2
 #define INCSR2_MODE_IN		0x20
