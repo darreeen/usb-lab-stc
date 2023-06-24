@@ -277,7 +277,36 @@ void get_configuration() {
 	control_in();
 }
 void set_configuration() {
+	if((gDeviceState == DEVICE_DEFAULT) ||
+		(gRequest.bmRequestType != (R_BMRT_REQ_DIRECTION_OUT | R_BMRT_REQ_TYPE_STD | R_BMRT_REQ_RECIPIENT_DEVICE)) ||
+		(gRequest.wValueH != 0) ||
+		(gRequest.wIndexH != 0) ||
+		(gRequest.wIndexL != 0) ||
+		(gRequest.wLength != 0)) {
+			control_stall();
+			return;
+	}
+	if(gRequest.wValueL == 1) {
+		gDeviceState = DEVICE_CONFIGURED;
+		gInEpHalt = 0x00;
+		gOutEpHalt = 0x00;
+		usb_write_reg(INDEX, 1);
+		usb_write_reg(INCSR2, INCSR2_MODE_IN);
+		usb_write_reg(INMAXP, EPS_IN_1 / 8);
 
+		usb_write_reg(INDEX, 1);
+		usb_write_reg(INCSR2, INCSR2_MODE_OUT);
+		usb_write_reg(OUTMAXP, EPS_OUT_1 / 8);
+
+		usb_write_reg(INDEX, 0);
+	} else {
+		gDeviceState = DEVICE_ADDRESS;
+		gInEpHalt = 0xff;
+		gOutEpHalt = 0xff;
+	}
+
+	gEp0.bState = EP_STATE_IDLE;
+	usb_write_reg(CSR0, CSR0_SOPRDY | CSR0_DATEND);
 }
 
 void get_interface() {}

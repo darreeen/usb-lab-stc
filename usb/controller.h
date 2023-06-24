@@ -43,6 +43,13 @@
 #define INCSR1_FLUSH 		0x08
 #define INCSR1_SDSTL 		0x10	//
 
+#define INCSR2 				0x12	// in endpoint controll register 2
+#define INCSR2_MODE_IN		0x20
+#define INCSR2_MODE_OUT		0x00
+
+#define INMAXP				0x10
+#define OUTMAXP				0x13
+
 #define OUTCSR1 			0x14	// out endpoint control register 2
 #define OUTCSR1_CLRDT 		0x80	// constants for INCSR1
 #define OUTCSR1_FLUSH 		0x18

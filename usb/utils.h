@@ -106,4 +106,12 @@ extern Request gRequest;
 * 5. USB Busy Indicator
 */
 extern unsigned char gUsbBusy;
+
+
+/**
+* 6. Endpoint maxium package bits
+*/
+#define EPS_IN_1							64
+#define EPS_OUT_1							64
+
 #endif
