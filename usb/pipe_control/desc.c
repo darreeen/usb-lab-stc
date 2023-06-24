@@ -218,6 +218,7 @@ __CODE char desc_product[30] = {
 	'M', 0,
 	'O', 0
 };
+// packats for getStatus, getInterface, getConfiguration
 // packet 0
 __CODE char packet0[2] = {
 	0, 0

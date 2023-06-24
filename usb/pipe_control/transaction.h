@@ -9,6 +9,7 @@ void control_in();
 
 void control_out();
 
+// not a specific transfer type but for send stall packet
 void control_stall();
 
 #endif

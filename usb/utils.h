@@ -40,8 +40,8 @@ typedef struct {
 // state structure for endpoint 0
 extern EndpointState gEp0;
 // other endpoint state variable
-extern unsigned char gInEpState;		// used for getStatus request
-extern unsigned char gOutEpState;
+extern unsigned char gInEpHalt;		// endpoint halt indicator
+extern unsigned char gOutEpHalt;
 
 /**
 * 3. Device State
