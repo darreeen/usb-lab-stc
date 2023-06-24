@@ -253,8 +253,32 @@ void set_descriptor() {
 	control_stall();
 }
 
-void get_configuration() {}
-void set_configuration() {}
+// get current using configuratin descriptor index, bConfigurationValue
+void get_configuration() {
+	if((gRequest.bmRequestType != (R_BMRT_REQ_DIRECTION_IN | R_BMRT_REQ_TYPE_STD | R_BMRT_REQ_RECIPIENT_DEVICE)) ||
+		(gRequest.wValueH != 0) ||
+		(gRequest.wValueL != 0) ||
+		(gRequest.wIndexH != 0) ||
+		(gRequest.wIndexL != 0) ||
+		(gRequest.wLength != 1))
+	{
+		control_stall();
+		return;
+	}
+	if(gDeviceState == DEVICE_CONFIGURED) {
+		gEp0.pData = packet1;
+		gEp0.wSize = 1;
+	} else {
+		gEp0.pData = packet0;
+		gEp0.wSize = 1;
+	}
+	gEp0.bState = EP_STATE_DATAIN;
+	usb_write_reg(CSR0, CSR0_SOPRDY);
+	control_in();
+}
+void set_configuration() {
+
+}
 
 void get_interface() {}
 void set_interface() {}
