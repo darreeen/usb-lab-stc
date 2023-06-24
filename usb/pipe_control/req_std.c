@@ -201,7 +201,53 @@ void set_address() {
 	gEp0.bState - EP_STATE_IDLE;
 	usb_write_reg(CSR0, CSR0_SOPRDY | CSR0_DATEND);
 }
-void get_descriptor() {}
+void get_descriptor() {
+	if((gRequest.bmRequestType & R_BMRT_REQ_DIRECTION_MASK) != R_BMRT_REQ_DIRECTION_IN) {
+		control_stall();
+		return;
+	}
+	switch(gRequest.wValueH) {
+		case 0x01: // device descriptor
+			gEp0.pData = desc_device;
+			gEp0.wSize = sizeof(desc_device);
+			break;
+		case 0x02: // configuration descriptor
+			gEp0.pData = desc_conf;
+			gEp0.wSize = sizeof(desc_conf);
+			break;
+		case 0x03: // string descriptor
+			switch (gRequest.wValueL)
+			{
+			case 0:		// language id descriptor
+				gEp0.pData = desc_lang;
+				gEp0.wSize = sizeof(desc_lang);
+				break;
+			case 1:		// manufacturer descriptor
+				gEp0.pData = desc_manufacturer;
+				gEp0.wSize = sizeof(desc_manufacturer);
+				break;
+			case 2:		// product descriptor
+				gEp0.pData = desc_product;
+				gEp0.wSize = sizeof(desc_product);
+				break;
+			default:
+				control_stall();
+				break;
+			}
+			break;
+		case 0x22:	// hid class descriptor, aka report descriptor
+			gEp0.pData = desc_hid_report;
+			gEp0.wSize = sizeof(desc_hid_report);
+			break;
+		default:
+			control_stall();
+			return;
+	}
+	// in case of over host request size:
+	if(gEp0.wSize > gRequest.wLength) {
+		gEp0.wSize = gRequest.wLength;
+	}
+}
 
 void set_descriptor() {
 	control_stall();
