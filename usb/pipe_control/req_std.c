@@ -101,7 +101,7 @@ void get_status() {
 		switch (gRequest.wIndexL)
 		{
 		case R_WI_EP1_IN:	// endpoint 1 IN
-			if(gInEpHalt & (1 << endpointNumber)) { // check if halted
+			if(gInEpHalt & (1 << endpointNumber)) { // check if halted // this might be problematic
 				gEp0.pData = packet1;
 			}
 			break;
@@ -136,7 +136,7 @@ void clear_feature() {
 	switch (gRequest.wIndexL)
 	{
 	case R_WI_EP1_IN:
-		gInEpHalt &= ~(1 << endpointNumber);
+		gInEpHalt &= ~(1 << endpointNumber);  // reset endpoint if halted
 		usb_write_reg(INDEX, endpointNumber);
 		usb_write_reg(INCSR1, INCSR1_CLRDT);
 		usb_write_reg(INDEX, 0);
@@ -152,9 +152,55 @@ void clear_feature() {
 	}
 }
 
-void set_feature() {}
+void set_feature() {
+	if((gDeviceState != DEVICE_CONFIGURED) ||
+		(gRequest.bmRequestType != (R_BMRT_REQ_DIRECTION_OUT | R_BMRT_REQ_TYPE_STD | R_BMRT_REQ_RECIPIENT_ENDPOINT)) ||
+		(gRequest.wIndexH != 0) || (gRequest.wValueH != 0) || (gRequest.wValueL != 0x00) || (gRequest.wLength != 0)) { // wValueL indicates endpoint halt
+			control_stall();
+			return;
+	}
+	unsigned char endpointNumber = gRequest.wIndexL & R_WI_EP_NUM_MASK;
+	switch (gRequest.wIndexL)
+	{
+	case R_WI_EP1_IN:
+		gInEpHalt |= (1 << endpointNumber);
+		usb_write_reg(INDEX, endpointNumber);
+		usb_write_reg(INCSR1, INCSR1_SDSTL);
+		usb_write_reg(INDEX, 0);
+		break;
+	case R_WI_EP1_OUT:
+		gOutEpHalt |= (1 << endpointNumber);
+		usb_write_reg(INDEX, endpointNumber);
+		usb_write_reg(OUTCSR1, OUTCSR1_SDSTL);
+		usb_write_reg(INDEX, 0);
+		break;
 
-void set_address() {}
+	default:
+		control_stall();
+		return;
+	}
+}
+
+void set_address() {
+	if((gRequest.bmRequestType != (R_BMRT_REQ_DIRECTION_OUT | R_BMRT_REQ_TYPE_STD | R_BMRT_REQ_RECIPIENT_DEVICE)) ||
+		(gRequest.wIndexH != 0) ||
+		(gRequest.wIndexL != 0) ||
+		(gRequest.wValueH != 0) ||
+		(gRequest.wValueL >= 0x80) ||
+		(gRequest.wLength != 0)) {
+			control_stall();
+	}
+	unsigned char addr = gRequest.wValueL;
+	usb_write_reg(FADDR, addr);
+	if(addr != 0) {
+		gDeviceState = DEVICE_ADDRESS;
+	} else {
+		gDeviceState = DEVICE_DEFAULT;
+	}
+	// set endpoint status
+	gEp0.bState - EP_STATE_IDLE;
+	usb_write_reg(CSR0, CSR0_SOPRDY | CSR0_DATEND);
+}
 void get_descriptor() {}
 
 void set_descriptor() {

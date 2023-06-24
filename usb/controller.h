@@ -36,14 +36,17 @@
 #define CSR0_SSUEND			0x80
 #define CSR0_OPRDY			0x01	// received an output transaction
 #define CSR0_SOPRDY			0x40	// clear output indicator
+#define CSR0_DATEND			0x08
 
 #define INCSR1 				0x11	// in endpoint controll register 1
 #define INCSR1_CLRDT 		0x40	// constants for INCSR1
 #define INCSR1_FLUSH 		0x08
+#define INCSR1_SDSTL 		0x10	//
 
 #define OUTCSR1 			0x14	// out endpoint control register 2
 #define OUTCSR1_CLRDT 		0x80	// constants for INCSR1
 #define OUTCSR1_FLUSH 		0x18
+#define OUTCSR1_SDSTL 		0x20	//
 
 #define FIFO0  				0x20
 #define FIFO1  				0x21
