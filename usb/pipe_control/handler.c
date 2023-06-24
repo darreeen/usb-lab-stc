@@ -39,15 +39,15 @@ void control_request(void) {
                     gRequest.wLength = reverse2uint16(gRequest.wLength);
                 #endif
 
-                switch (gRequest.bmRequestType & BMRT_REQ_TYPE_MASK)
+                switch (gRequest.bmRequestType & R_BMRT_REQ_TYPE_MASK)
                 {
-                case BMRT_REQ_TYPE_STD:
+                case R_BMRT_REQ_TYPE_STD:
                     req_std();
                     break;
-                case BMRT_REQ_TYPE_CLASS:
+                case R_BMRT_REQ_TYPE_CLASS:
                     req_class();
                     break;
-                case BMRT_REQ_TYPE_VENDOR:
+                case R_BMRT_REQ_TYPE_VENDOR:
                     req_vendor();
                     break;
                 default:
