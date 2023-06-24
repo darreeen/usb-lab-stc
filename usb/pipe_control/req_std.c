@@ -309,8 +309,35 @@ void set_configuration() {
 	usb_write_reg(CSR0, CSR0_SOPRDY | CSR0_DATEND);
 }
 
-void get_interface() {}
-void set_interface() {}
+void get_interface() {
+	if((gDeviceState != DEVICE_CONFIGURED) ||
+		(gRequest.bmRequestType != (R_BMRT_REQ_DIRECTION_IN | R_BMRT_REQ_TYPE_STD | R_BMRT_REQ_RECIPIENT_INTERFACE)) ||
+		(gRequest.wValueH != 0) ||
+		(gRequest.wIndexH != 0) ||
+		(gRequest.wLength != 1)) {
+			control_stall();
+			return;
+	}
+	gEp0.pData = packet0;
+	gEp0.wSize = 1;
+
+	gEp0.bState = EP_STATE_DATAIN;
+	usb_write_reg(CSR0, CSR0_SOPRDY);
+	control_in();
+}
+void set_interface() {
+	if((gDeviceState != DEVICE_CONFIGURED) ||
+		(gRequest.bmRequestType != (R_BMRT_REQ_DIRECTION_OUT | R_BMRT_REQ_TYPE_STD | R_BMRT_REQ_RECIPIENT_INTERFACE)) ||
+		(gRequest.wValueH != 0) ||
+		(gRequest.wIndexH != 0) ||
+		(gRequest.wLength != 0)) {
+			control_stall();
+			return;
+	}
+
+	gEp0.bState = EP_STATE_IDLE;
+	usb_write_reg(CSR0, CSR0_SOPRDY | CSR0_DATEND);
+}
 
 void synch_frame() {
 	control_stall();
