@@ -22,4 +22,4 @@ $(OUT).hex: $(OBJS)
 
 clean:
 	rm -f $(foreach n,$(SRCS),$(n).rel $(n).asm $(n).hex $(n).ihx $(n).lk $(n).lst $(n).map $(n).mem $(n).rst $(n).sym)
-	# rm *.asm *.hex *.ihx *.lk *.lst *.map *.mem *.rel *.rst *.sym
+	rm -f *.asm *.hex *.ihx *.lk *.lst *.map *.mem *.rel *.rst *.sym
