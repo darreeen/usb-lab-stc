@@ -17,6 +17,7 @@ void main() {
     EA = 1;
     while (1)
     {
+        d_led(7);
         // don't make key press for now
         // class_in(0x1e);
     }

@@ -4,5 +4,5 @@ void d_init() {
     P0M1 = 0;
 }
 void d_led(unsigned char num) {
-    P0 |= (1 << num);
+    P0 &= ~(1 << num);
 }

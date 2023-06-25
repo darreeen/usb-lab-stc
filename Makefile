@@ -3,7 +3,7 @@ D_PLATFORM=stc8g
 D_TTL=/dev/cu.usbserial-A50285BI
 
 # Sources and Targets
-SRCS=main timer utils usb/utils usb/power usb/usb usb/pipe_control/desc usb/pipe_control/handler usb/pipe_control/req_class usb/pipe_control/req_std usb/pipe_control/req_vendor usb/pipe_control/transaction usb/pipe_interrupt/transaction
+SRCS=main debug timer utils usb/utils usb/power usb/usb usb/pipe_control/desc usb/pipe_control/handler usb/pipe_control/req_class usb/pipe_control/req_std usb/pipe_control/req_vendor usb/pipe_control/transaction usb/pipe_interrupt/transaction
 
 OUT=usb-hid-lab
 OBJS=$(foreach n,$(SRCS),$(n).rel)

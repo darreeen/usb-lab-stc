@@ -5,7 +5,11 @@
 #ifndef __USB_UTILS_
 #define __USB_UTILS_
 
+#if defined (SDCC) || defined (__SDCC)
 #include <stdint.h>
+#else
+#define uint16_t unsigned int
+#endif
 #include "../address.h"
 #include "controller.h"
 /**

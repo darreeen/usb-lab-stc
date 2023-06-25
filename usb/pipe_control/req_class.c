@@ -9,8 +9,6 @@
 
 #define DESC_HIDREPORT          0x22
 
-void class_out();
-
 void get_report();
 void set_report();
 
