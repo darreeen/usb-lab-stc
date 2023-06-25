@@ -37,6 +37,11 @@ SBIT(ET0, 0xa8, 1);
 
 // interrupt related
 
+// parallel port 0
+SFR(P0, 0x80);
+
+SFR(P0M0, 0x94);
+SFR(P0M1, 0x93);
 
 // external sfr
 #define     IRC48MCR                (*(unsigned char volatile __XDATA *)0xfe07)

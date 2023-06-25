@@ -11,11 +11,14 @@ INTERRUPT_USING(usb_isr, 25, 2) {
 	if(intrusb & INTRUSB_RSUIF)	usb_pm_resume();
 	if(intrusb & INTRUSB_RSTIF)	usb_pm_reset();
 
-	// process control pipe in
-
+	// process control pipe request
+	if(intrin & INTRIN1_EP0IF) control_request();
 	// process in transaction
-
+	if(intrin & INTRIN1_EP1INIF) ep1_in();
 	// process out transaction
+	if(introut & INTROUT1_EP1OUTIF) ep1_out();
+
+	if(intrusb & INTRUSB_SUSIF) usb_pm_suspend();
 
 }
 

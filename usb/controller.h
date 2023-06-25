@@ -17,12 +17,16 @@
 #define INTRUSBE 			0X0b	// Power Management
 // interrupt sign
 #define INTRIN1				0x02	// In endpoints
+#define INTRIN1_EP0IF		0x01
+#define INTRIN1_EP1INIF		0x02
 
 #define INTROUT1			0x04	// Out endpoints
+#define INTROUT1_EP1OUTIF	0x02
 
 #define INTRUSB				0x06	// Power Management
 #define INTRUSB_RSUIF		0x02
 #define INTRUSB_RSTIF		0x04
+#define INTRUSB_SUSIF		0x01
 
 // length count of endpoints OUT and IN
 #define COUNT0 				0x16 	// endpoint0 IN and out
@@ -46,6 +50,8 @@
 #define INCSR1_FLUSH 		0x08
 #define INCSR1_SDSTL 		0x10
 #define INCSR1_IPRDY 		0x01
+#define INCSR1_STSTL 		0x20
+#define INCSR1_UNDRUN 		0x04
 
 #define INCSR2 				0x12	// in endpoint controll register 2
 #define INCSR2_MODE_IN		0x20
@@ -57,7 +63,9 @@
 #define OUTCSR1 			0x14	// out endpoint control register 2
 #define OUTCSR1_CLRDT 		0x80	// constants for INCSR1
 #define OUTCSR1_FLUSH 		0x18
-#define OUTCSR1_SDSTL 		0x20	//
+#define OUTCSR1_SDSTL 		0x20
+#define OUTCSR1_STSTL 		0x40
+#define OUTCSR1_OPRDY 		0x01
 
 #define FIFO0  				0x20
 #define FIFO1  				0x21

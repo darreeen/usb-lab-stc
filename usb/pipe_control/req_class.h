@@ -10,4 +10,5 @@
 
 void req_class();
 void class_in(unsigned char report_key_code);
+void class_out();
 #endif

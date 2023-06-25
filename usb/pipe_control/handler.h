@@ -14,4 +14,8 @@
 
 void control_request();
 
+// holy blob, it's getting messy.
+void ep1_out();
+void ep1_in();
+
 #endif

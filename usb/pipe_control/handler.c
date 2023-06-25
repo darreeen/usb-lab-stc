@@ -67,3 +67,27 @@ void control_request(void) {
         break;
     }
 }
+
+void ep1_out() {
+    unsigned char outcsr1;
+    usb_write_reg(INDEX, 1);
+    outcsr1 = usb_read_reg(OUTCSR1);
+    if(outcsr1 & OUTCSR1_STSTL) {
+        usb_write_reg(OUTCSR1, OUTCSR1_CLRDT);
+    }
+    if(outcsr1 & OUTCSR1_OPRDY) {
+        class_out();
+    }
+}
+void ep1_in() {
+    unsigned char incsr1;
+    usb_write_reg(INDEX, 1);
+    incsr1 = usb_read_reg(INCSR1);
+    if(incsr1 & INCSR1_STSTL) {
+        usb_write_reg(INCSR1, INCSR1_CLRDT);
+    }
+    if(incsr1 & INCSR1_UNDRUN) {
+        usb_write_reg(INCSR1, 0);
+    }
+    gUsbBusy = 0;
+}
