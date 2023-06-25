@@ -1,4 +1,4 @@
-SRCS=main timer utils usb/usb usb/utils usb/pipe_control/desc usb/pipe_control/handler usb/pipe_control/req_class usb/pipe_control/req_std usb/pipe_control/req_vendor usb/pipe_control/transaction usb/pipe_interrupt/transaction
+SRCS=main timer utils usb/utils usb/power usb/usb usb/pipe_control/desc usb/pipe_control/handler usb/pipe_control/req_class usb/pipe_control/req_std usb/pipe_control/req_vendor usb/pipe_control/transaction usb/pipe_interrupt/transaction
 
 OUT=main
 OBJS=$(foreach n,$(SRCS),$(n).rel)
@@ -14,7 +14,7 @@ ALL = $(OUT).hex
 all:	$(ALL)
 
 $(OUT).hex: $(OBJS)
-	$(LD) $(LDFLAGS) -g $(OBJS) -o $(OUT).elf
+	$(LD) $(LDFLAGS) $(OBJS) -o $(OUT).hex
 
 %.rel:	%.c
 	$(CC) $(CFLAGS) -o $@ $<
