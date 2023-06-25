@@ -23,4 +23,20 @@ SFR(USBCLK, 0xdc);
 SFR(USBADR, 0xfc);
 SFR(USBDAT, 0xec);
 
+// timer related regs
+SFR(AUXR, 0x8e);
+SFR(TMOD, 0x89);
+SFR(TL0, 0x8a);
+SFR(TH0, 0x8c);
+// TMOD bit 4
+SBIT(TR0, 0x89, 4);
+// ET0 bit 1
+SBIT(ET0, 0xa8, 1);
+
+// interrupt related
+
+
+// external sfr
+#define     IRC48MCR                (*(unsigned char volatile __XDATA *)0xfe07)
+
 #endif

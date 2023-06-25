@@ -30,8 +30,8 @@ void usb_init() {
 	// initial value for device and endpoints
 	gDeviceState = DEVICE_DEFAULT;
 	gEp0.bState  = EP_STATE_IDLE;
-	gInEpState	 = 0x00;
-	gOutEpState	 = 0x00;
+	gInEpHalt	 = 0x00;
+	gOutEpHalt	 = 0x00;
 	gUsbBusy	 = 0;
 
 	// enable usb interrupt in mcs51 core
