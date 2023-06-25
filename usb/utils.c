@@ -2,10 +2,11 @@
 // global variables
 unsigned char gDeviceState;
 EndpointState gEp0;
-unsigned char gInEpState;
-unsigned char gOutEpState;
+unsigned char gInEpHalt;
+unsigned char gOutEpHalt;
 Request gRequest;
 unsigned char gUsbBusy;
+unsigned char __XDATA gUsbBuffer[256];
 
 unsigned char usb_read_reg(unsigned char usb_reg_addr) {
 	unsigned char data;
