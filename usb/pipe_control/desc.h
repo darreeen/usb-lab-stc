@@ -22,7 +22,7 @@ __CODE extern char desc_manufacturer[12];
 __CODE extern char desc_product[30];
 
 // class specific
-__CODE extern char desc_hid_report[23];
+__CODE extern char desc_hid_report[43];
 __CODE extern char packet0[2];
 __CODE extern char packet1[2];
 
