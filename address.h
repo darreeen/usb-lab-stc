@@ -30,7 +30,9 @@ SFR(TL0, 0x8a);
 SFR(TH0, 0x8c);
 // TMOD bit 4
 SBIT(TR0, 0x89, 4);
-// ET0 bit 1
+// IE0 bit 0
+SBIT(EA, 0xa8, 0);
+// IE0 bit 1
 SBIT(ET0, 0xa8, 1);
 
 // interrupt related
