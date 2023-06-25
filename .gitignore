@@ -11,6 +11,9 @@
 *.rst
 *.sym
 *.asm
+*.adb
+*.cdb
+*.omf
 
 # MacOS files
 

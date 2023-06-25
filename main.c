@@ -3,6 +3,7 @@
 #include "usb/pipe_control/req_class.h"
 #include "timer.h"
 
+#include "debug.h"
 
 void sys_init();
 
@@ -10,6 +11,9 @@ void main() {
     sys_init();
     usb_init();
     timer_init();
+
+    d_init();
+
     EA = 1;
     while (1)
     {

@@ -8,17 +8,35 @@ INTERRUPT_USING(usb_isr, 25, 2) {
 	unsigned char introut	= usb_read_reg(INTROUT1);
 
 	// process power management interrupts
-	if(intrusb & INTRUSB_RSUIF)	usb_pm_resume();
-	if(intrusb & INTRUSB_RSTIF)	usb_pm_reset();
+	if(intrusb & INTRUSB_RSUIF)	{
+		usb_pm_resume();
+		d_led(0);
+	}
+	if(intrusb & INTRUSB_RSTIF)	{
+		usb_pm_reset();
+		d_led(1);
+	}
 
 	// process control pipe request
-	if(intrin & INTRIN1_EP0IF) control_request();
+	if(intrin & INTRIN1_EP0IF) {
+		control_request();
+		d_led(2);
+	}
 	// process in transaction
-	if(intrin & INTRIN1_EP1INIF) ep1_in();
+	if(intrin & INTRIN1_EP1INIF) {
+		ep1_in();
+		d_led(3);
+	}
 	// process out transaction
-	if(introut & INTROUT1_EP1OUTIF) ep1_out();
+	if(introut & INTROUT1_EP1OUTIF) {
+		ep1_out();
+		d_led(4);
+	}
 
-	if(intrusb & INTRUSB_SUSIF) usb_pm_suspend();
+	if(intrusb & INTRUSB_SUSIF) {
+		usb_pm_suspend();
+		d_led(5);
+	}
 
 }
 
