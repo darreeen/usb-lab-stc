@@ -13,7 +13,8 @@ void main() {
     EA = 1;
     while (1)
     {
-        class_in(0x1e);
+        // don't make key press for now
+        // class_in(0x1e);
     }
 
 }
