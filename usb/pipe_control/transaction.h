@@ -5,6 +5,8 @@
 #ifndef __CTRL_TRANS_TRANSACTION_
 #define __CTRL_TRANS_TRANSACTION_
 
+#include "../utils.h"
+
 void control_in();
 
 void control_out();

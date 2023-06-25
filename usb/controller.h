@@ -37,6 +37,9 @@
 #define CSR0_OPRDY			0x01	// received an output transaction
 #define CSR0_SOPRDY			0x40	// clear output indicator
 #define CSR0_DATEND			0x08
+#define CSR0_IPRDY			0x02
+#define CSR0_SDSTL			0x20
+
 
 #define INCSR1 				0x11	// in endpoint controll register 1
 #define INCSR1_CLRDT 		0x40	// constants for INCSR1

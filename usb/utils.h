@@ -115,6 +115,7 @@ extern unsigned char __XDATA gUsbBuffer[256];
 /**
 * 7. Endpoint maxium package bits
 */
+#define EPS_0								64
 #define EPS_IN_1							64
 #define EPS_OUT_1							64
 

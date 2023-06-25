@@ -43,5 +43,5 @@ unsigned char usb_read_fifo(unsigned char usb_fifo_reg_addr, unsigned char *pdat
 		*pdata = usb_read_reg(usb_fifo_reg_addr);
 		pdata++;
 	}
-	return 0;
+	return return_vale;
 }

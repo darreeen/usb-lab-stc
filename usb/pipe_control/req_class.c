@@ -58,7 +58,7 @@ void class_in(unsigned char report_key_code) {
     keys_report[2] = report_key_code;
 
     IE2 &= ~0x80; // disable usb interrupt
-    gUsbBusy = 1
+    gUsbBusy = 1;
     usb_write_reg(INDEX, 1);
     usb_write_fifo(FIFO1, keys_report, 8);
     usb_write_reg(INCSR1, INCSR1_IPRDY);
