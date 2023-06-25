@@ -131,7 +131,7 @@ __CODE char desc_conf[41] = {
 // https://learn.adafruit.com/custom-hid-devices-in-circuitpython/report-descriptors
 // http://eleccelerator.com/usbdescreqparser/
 // https://github.com/NordicSemiconductor/ble-sdk-arduino/blob/master/libraries/BLE/examples/ble_HID_keyboard_template/USD%20HID%20Report%20Descriptor%20-%20Keyboard.txt
-__CODE char desc_hid_report[23] = {
+__CODE char desc_hid_report[43] = {
 	// select usage page and keyboard usage
 	0x05, 0x01,	// Global: Usage Pages 1 byte 00000101, Generic Desktop Page 0x01,
 				// 			use for select General Desktop Page, and concat with keyboard usage

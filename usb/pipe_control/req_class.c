@@ -9,7 +9,6 @@
 
 #define DESC_HIDREPORT          0x22
 
-void class_in();
 void class_out();
 
 void get_report();
