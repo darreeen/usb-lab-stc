@@ -8,6 +8,8 @@
 #include "desc.h"
 #include "transaction.h"
 
+#include "../../debug.h"
+
 // process standard usb request
 void req_std();
 

@@ -12,7 +12,7 @@
 __CODE char desc_device[18] = {
 	0x12,		// 0.bLength: descriptor size in bytes
 				// 			use 0x12 for dec 18 = 0x12 hex
-	0x00,		// 1.bDescriptorType:
+	0x01,		// 1.bDescriptorType:
 				//			use 0x1 for DEVICE Descriptor
 	0x00, 0x02, // 2.bcdUSB:	2 Bytes. USB specification release number(BCD)
 				//			use 0x0200 because device supports usb full speed(2.0), and it's little endian
@@ -24,7 +24,7 @@ __CODE char desc_device[18] = {
 				//			use 0x00 because if the bDeviceClass is 0, then bDeviceSubclass must be 0x00
 	0x00,		// 6.bDeviceProtocol: specify protocol for selected class and subclass
 				//			use 0x00 for the field is defined by the device's class
-	0x00,		// 7.bMaxPacketSize0: max packet size for endpoint 0
+	0x40,		// 7.bMaxPacketSize0: max packet size for endpoint 0
 				//			use 0x40 (dec 64) for full speed usb support 64
 	0xbf, 0x34,	// 8.idVendor: 2 Bytes. vendor id
 				//			use 0x34bf for STC chip.
@@ -96,7 +96,7 @@ __CODE char desc_conf[41] = {
 				//			use 0x01
 	0x22,		// 6.bDescriptorType: constant name identifying type of class descriptor
 				//			use 0x22, for hid report descriptor
-	0x41, 0x00,	// 7.wDescriptorLength: total size of report descriptor
+	0x2b, 0x00,	// 7.wDescriptorLength: total size of report descriptor
 				// 			use 0x3f or 0x41
 
 	// 3. endpoint in descriptor
