@@ -1,0 +1,7 @@
+debug facility for stc8h
+------------------------
+
+this debug facility using UART 2 and timer 2 by default.
+and it's altering main clock to set baud rate
+
+make sure upper folder has compatible.h
