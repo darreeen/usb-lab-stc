@@ -3,7 +3,6 @@
 #include "usb/pipe_control/req_class.h"
 #include "timer.h"
 
-#include "debug.h"
 
 // interrupt service routine
 // void usb_isr(void) __interrupt (25) __using (2) {
@@ -21,7 +20,6 @@ INTERRUPT_USING(usb_isr, 25, 2) {
 	}
 	// process control pipe request
 	if(intrin & INTRIN1_EP0IF) {
-		d_led(1, 1);
 		control_request();
 	}
 	// process in transaction
@@ -50,7 +48,6 @@ void main() {
     // EA = 1;
     while (1)
     {
-        // d_led(8, 1);
         // don't make key press for now
         // class_in(0x1e);
     }

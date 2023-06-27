@@ -2,7 +2,6 @@
 #define __ADDRESS_
 
 #include "compatible.h"
-#include "debug.h"
 
 // STC extend registers
 // P_SW2 peripheral switch 2

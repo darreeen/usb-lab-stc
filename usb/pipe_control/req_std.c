@@ -23,24 +23,18 @@ void req_std() {
 	switch (gRequest.bRequest)
 	{
 	case R_BR_GET_STATUS:
-		d_led(10, 1);
 		get_status();
 		break;
 	case R_BR_CLEAR_FEATURE:
-		d_led(9, 1);
 		clear_feature();
 		break;
 	case R_BR_SET_FEATURE:
-		d_led(8, 1);
 		set_feature();
 		break;
 	case R_BR_SET_ADDRESS:
-		d_led(7, 1);
 		set_address();
-		d_led(6, 1);
 		break;
 	case R_BR_GET_DESCRIPTOR:
-			d_led(4, 1);
 		get_descriptor();
 
 		break;
@@ -49,23 +43,18 @@ void req_std() {
 		set_descriptor();
 		break;
 	case R_BR_GET_CONFIGURATION:
-		d_led(11, 1);
 		get_configuration();
 		break;
 	case R_BR_SET_CONFIGURATION:
-		d_led(5, 1);
 		set_configuration();
 		break;
 	case R_BR_GET_INTERFACE:
-		d_led(12, 1);
 		set_interface();
 		break;
 	case R_BR_SET_INTERFACE:
-		d_led(13, 1);
 		set_interface();
 		break;
 	case R_BR_SYNCH_FRAME:
-		d_led(14, 1);
 		synch_frame();
 		break;
 	default:

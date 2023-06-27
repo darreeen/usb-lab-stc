@@ -22,7 +22,6 @@ void control_request(void) {
     }
 	switch (gEp0.bState) {
         case EP_STATE_IDLE:
-        		d_led(2, 1);
             // if the OUT packet from host is ready, we send the data.
             if(csr & CSR0_OPRDY) {
                 usb_read_fifo(FIFO0, (unsigned char *) & gRequest);
@@ -43,7 +42,6 @@ void control_request(void) {
                 switch (gRequest.bmRequestType & R_BMRT_REQ_TYPE_MASK)
                 {
                 case R_BMRT_REQ_TYPE_STD:
-                		d_led(3, 1);
                     req_std();
                     break;
                 case R_BMRT_REQ_TYPE_CLASS:

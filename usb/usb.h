@@ -6,7 +6,6 @@
 #include "utils.h"
 #include "power.h"
 
-#include "../debug.h"
 
 void usb_init();
 #endif
