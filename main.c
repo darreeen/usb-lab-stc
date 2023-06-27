@@ -1,7 +1,6 @@
 #include "address.h"
 #include "usb/usb.h"
 #include "usb/pipe_control/req_class.h"
-#include "timer.h"
 
 
 // interrupt service routine

@@ -1,7 +1,7 @@
 #include "debug.h"
 #include "uart.h"
 
-void debug_init() {
+void d_init() {
     uart_init();
 }
 
