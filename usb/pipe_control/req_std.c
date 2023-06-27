@@ -23,41 +23,52 @@ void req_std() {
 	switch (gRequest.bRequest)
 	{
 	case R_BR_GET_STATUS:
+		d_std_req("Get Status");
 		get_status();
 		break;
 	case R_BR_CLEAR_FEATURE:
+		d_std_req("Clear Feature");
 		clear_feature();
 		break;
 	case R_BR_SET_FEATURE:
+		d_std_req("Set Feature");
 		set_feature();
 		break;
 	case R_BR_SET_ADDRESS:
+		d_std_req("Set Address");
 		set_address();
 		break;
 	case R_BR_GET_DESCRIPTOR:
+		d_std_req("Get Descriptor");
 		get_descriptor();
 
 		break;
 	case R_BR_SET_DESCRIPTOR:
-
+		d_std_req("Set Descriptor");
 		set_descriptor();
 		break;
 	case R_BR_GET_CONFIGURATION:
+		d_std_req("Get Configuration");
 		get_configuration();
 		break;
 	case R_BR_SET_CONFIGURATION:
+		d_std_req("Set Configuration");
 		set_configuration();
 		break;
 	case R_BR_GET_INTERFACE:
-		set_interface();
+		d_std_req("Get Interface");
+		get_interface();
 		break;
 	case R_BR_SET_INTERFACE:
+		d_std_req("Set Interface");
 		set_interface();
 		break;
 	case R_BR_SYNCH_FRAME:
+		d_std_req("Synch Frame");
 		synch_frame();
 		break;
 	default:
+		d_stall_info("Unsupported Standard Request. gRequest.bRequest", gRequest.bRequest);
 		control_stall();
 		break;
 	}
@@ -210,38 +221,47 @@ void get_descriptor() {
 	}
 	switch(gRequest.wValueH) {
 		case 0x01: // device descriptor
+			d_req_detail("Device Descriptor");
 			gEp0.pData = desc_device;
 			gEp0.wSize = sizeof(desc_device);
 			break;
 		case 0x02: // configuration descriptor
+			d_req_detail("Configuration Descriptor");
 			gEp0.pData = desc_conf;
 			gEp0.wSize = sizeof(desc_conf);
 			break;
 		case 0x03: // string descriptor
+			d_req_detail("String Descriptor");
 			switch (gRequest.wValueL)
 			{
 			case 0:		// language id descriptor
+				d_req_detail("LangID Descriptor");
 				gEp0.pData = desc_lang;
 				gEp0.wSize = sizeof(desc_lang);
 				break;
 			case 1:		// manufacturer descriptor
+				d_req_detail("Maufacturer Descriptor");
 				gEp0.pData = desc_manufacturer;
 				gEp0.wSize = sizeof(desc_manufacturer);
 				break;
 			case 2:		// product descriptor
+				d_req_detail("Product Descriptor");
 				gEp0.pData = desc_product;
 				gEp0.wSize = sizeof(desc_product);
 				break;
 			default:
+				d_stall_info("Unsupported String Descriptor. gRequest.wValueL", gRequest.wValueL);
 				control_stall();
 				break;
 			}
 			break;
 		case 0x22:	// hid class descriptor, aka report descriptor
+			d_req_detail("Class Descriptor: HID Report Descriptor");
 			gEp0.pData = desc_hid_report;
 			gEp0.wSize = sizeof(desc_hid_report);
 			break;
 		default:
+			d_stall_info("Unsupported Descriptor Type. gRequest.wValueH", gRequest.wValueH);
 			control_stall();
 			return;
 	}

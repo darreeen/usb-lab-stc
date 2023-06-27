@@ -3,7 +3,7 @@ D_PLATFORM=stc8g
 D_TTL=/dev/cu.usbserial-A50285BI
 
 # Sources and Targets
-SRCS=main debug timer utils usb/utils usb/power usb/usb usb/pipe_control/desc usb/pipe_control/handler usb/pipe_control/req_class usb/pipe_control/req_std usb/pipe_control/req_vendor usb/pipe_control/transaction usb/pipe_interrupt/transaction
+SRCS=main debug/debug debug/uart timer utils usb/utils usb/power usb/usb usb/pipe_control/desc usb/pipe_control/handler usb/pipe_control/req_class usb/pipe_control/req_std usb/pipe_control/req_vendor usb/pipe_control/transaction usb/pipe_interrupt/transaction
 
 OUT=usb-hid-lab
 OBJS=$(foreach n,$(SRCS),$(n).rel)
@@ -30,4 +30,4 @@ clean:
 	rm -f *.asm *.hex *.ihx *.lk *.lst *.map *.mem *.rel *.rst *.sym
 
 flash:
-	stcgal -P $(D_PLATFORM) -p $(D_TTL) ./$(OUT).hex
+	stcgal -P $(D_PLATFORM) -t 22118 -p $(D_TTL) ./$(OUT).hex

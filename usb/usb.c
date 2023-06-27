@@ -1,5 +1,6 @@
 #include "usb.h"
 
+#include "../debug/debug.h"
 
 void usb_init() {
 	usb_write_reg(FADDR, 0x00); 	// reset to default usb address
@@ -18,4 +19,6 @@ void usb_init() {
 
 	// enable usb interrupt in mcs51 core
 	IE2 |= 0x80;
+
+	d_puts("USB inited successfully \n\r");
 }

@@ -40,7 +40,7 @@ char putchar(char c) {
 }
 
 int puts(char * s) {
-    int length = 0;
+    unsigned int length = 0;
     while(*s) {
         putchar(*s);
         s++;

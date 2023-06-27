@@ -5,6 +5,8 @@
 #ifndef __USB_UTILS_
 #define __USB_UTILS_
 
+#include "../debug/debug.h"
+
 #if defined (SDCC) || defined (__SDCC)
 #include <stdint.h>
 #else
