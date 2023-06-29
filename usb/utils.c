@@ -41,8 +41,7 @@ unsigned char usb_read_fifo(unsigned char usb_fifo_reg_addr, unsigned char *pdat
 
 	// keep reading till all data are read.
 	while(count--) {
-		*pdata = usb_read_reg(usb_fifo_reg_addr);
-		pdata++;
+		*pdata++ = usb_read_reg(usb_fifo_reg_addr);
 	}
 	return return_vale;
 }

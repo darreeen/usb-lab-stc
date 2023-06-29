@@ -20,10 +20,13 @@ void control_request(void) {
     if (csr & CSR0_SUEND) {
         usb_write_reg(CSR0, csr | CSR0_SSUEND);
     }
+    d_ep_state("Endpoint 0 bState", gEp0.bState);
 	switch (gEp0.bState) {
         case EP_STATE_IDLE:
+
             // if the OUT packet from host is ready, we send the data.
             if(csr & CSR0_OPRDY) {
+                d_info_v("gRequest.bmRequestType", gRequest.bmRequestType);
                 usb_read_fifo(FIFO0, (unsigned char *) & gRequest);
 
                 // i have no idea why the heck STC demo code reverse bytes of wLength
@@ -36,8 +39,10 @@ void control_request(void) {
                 // https://stackoverflow.com/questions/2477379/does-8-bit-processor-have-to-face-endianness-problem
 
                 #if defined __CX51__
-                    gRequest.wLength = reverse2uint16(gRequest.wLength);
+                    gEp0.wSize = reverse2uint16(gRequest.wLength);
                 #endif
+
+                d_info_v("gRequest.wLength", gRequest.wLength);
 
                 switch (gRequest.bmRequestType & R_BMRT_REQ_TYPE_MASK)
                 {
@@ -51,9 +56,13 @@ void control_request(void) {
                     req_vendor();
                     break;
                 default:
+                    d_stall_info("Unsupport Request Type. gEp0.bState", gEp0.bState);
                     control_stall();
                     break;
                 }
+            } else {
+                d_info_v("Not Yet Received OUT. gRequest.bmRequestType", gRequest.bmRequestType);
+                d_info_v("Not Yet Received OUT. gRequest.bRequest", gRequest.bRequest);
             }
         break;
         case EP_STATE_DATAIN: // if there's unfinished transaction

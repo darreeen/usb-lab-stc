@@ -227,8 +227,10 @@ void get_descriptor() {
 			break;
 		case 0x02: // configuration descriptor
 			d_req_detail("Configuration Descriptor");
+			d_info_v("gRequest.wLength", gRequest.wLength);
 			gEp0.pData = desc_conf;
 			gEp0.wSize = sizeof(desc_conf);
+			d_info_v("value of wSize:", sizeof(desc_conf));
 			break;
 		case 0x03: // string descriptor
 			d_req_detail("String Descriptor");
@@ -261,6 +263,7 @@ void get_descriptor() {
 			gEp0.wSize = sizeof(desc_hid_report);
 			break;
 		default:
+			// During debug, device could received type 0x06, Device Qualifier. it's not supported and that's okay
 			d_stall_info("Unsupported Descriptor Type. gRequest.wValueH", gRequest.wValueH);
 			control_stall();
 			return;
